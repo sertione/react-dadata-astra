@@ -10,10 +10,13 @@ interface Props extends BaseProps<DaDataBank> {
   filterType?: DaDataBankType[];
   filterLocations?: Dictionary[];
   filterLocationsBoost?: Dictionary[];
+  host?: string;
 }
 
 export class BankSuggestions extends BaseSuggestions<DaDataBank, Props> {
-  loadSuggestionsUrl = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/bank';
+  loadSuggestionsUrl: string = this.props.host 
+    ? `${this.props.host}/suggestions/api/4_1/rs/suggest/bank`
+    : 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/bank';
 
   getLoadSuggestionsData = (): Record<string, unknown> => {
     const { count, filterStatus, filterType, filterLocations, filterLocationsBoost } = this.props;

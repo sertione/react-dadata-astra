@@ -6,10 +6,13 @@ import type { DaDataFio, DaDataGender, DaDataSuggestion } from './types';
 interface Props extends BaseProps<DaDataFio> {
   filterGender?: DaDataGender[];
   filterParts?: string[];
+  host?: string;
 }
 
 export class FioSuggestions extends BaseSuggestions<DaDataFio, Props> {
-  loadSuggestionsUrl = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/fio';
+  loadSuggestionsUrl: string = this.props.host 
+    ? `${this.props.host}/suggestions/api/4_1/rs/suggest/fio`
+    : 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/fio';
 
   getLoadSuggestionsData = (): Record<string, unknown> => {
     const { count, filterGender, filterParts } = this.props;

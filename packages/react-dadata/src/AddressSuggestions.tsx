@@ -12,10 +12,13 @@ interface Props extends BaseProps<DaDataAddress> {
   filterLocations?: Dictionary[];
   filterLocationsBoost?: Dictionary[];
   filterRestrictValue?: boolean;
+  host?: string;
 }
 
 export class AddressSuggestions extends BaseSuggestions<DaDataAddress, Props> {
-  loadSuggestionsUrl = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
+  loadSuggestionsUrl: string = this.props.host 
+    ? `${this.props.host}/suggestions/api/4_1/rs/suggest/address`
+    : 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/address';
 
   getLoadSuggestionsData = (): Record<string, unknown> => {
     const {

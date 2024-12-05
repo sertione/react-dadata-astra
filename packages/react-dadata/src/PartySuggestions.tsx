@@ -12,10 +12,13 @@ interface Props extends BaseProps<DaDataParty> {
   filterOkved?: string[];
   filterLocations?: Dictionary[];
   filterLocationsBoost?: Dictionary[];
+  host?: string;
 }
 
 export class PartySuggestions extends BaseSuggestions<DaDataParty, Props> {
-  loadSuggestionsUrl = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party';
+  loadSuggestionsUrl: string = this.props.host 
+    ? `${this.props.host}/suggestions/api/4_1/rs/suggest/party`
+    : 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/party';
 
   getLoadSuggestionsData = (): Record<string, unknown> => {
     const { count, filterStatus, filterType, filterOkved, filterLocations, filterLocationsBoost } = this.props;

@@ -3,10 +3,14 @@ import { type BaseProps, BaseSuggestions } from './BaseSuggestions';
 import { HighlightWords } from './HighlightWords';
 import type { DaDataEmail, DaDataSuggestion } from './types';
 
-type Props = BaseProps<DaDataEmail>;
+interface Props extends BaseProps<DaDataEmail> {
+  host?: string;
+}
 
 export class EmailSuggestions extends BaseSuggestions<DaDataEmail, Props> {
-  loadSuggestionsUrl = 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/email';
+  loadSuggestionsUrl: string = this.props.host 
+    ? `${this.props.host}/suggestions/api/4_1/rs/suggest/email`
+    : 'https://suggestions.dadata.ru/suggestions/api/4_1/rs/suggest/email';
 
   getLoadSuggestionsData = (): Record<string, unknown> => {
     const { count } = this.props;

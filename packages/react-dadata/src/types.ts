@@ -13,7 +13,8 @@ export interface DaDataSuggestion<T> {
  * Общие пропсы для всех видов компонента подсказов
  */
 export interface CommonProps<SuggestionType> {
-  token: string;
+  token?: string;
+  jwt?: string;
   value?: DaDataSuggestion<SuggestionType>;
   url?: string;
   defaultQuery?: string;

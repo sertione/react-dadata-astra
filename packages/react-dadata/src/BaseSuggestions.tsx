@@ -257,7 +257,7 @@ export abstract class BaseSuggestions<SuggestionType, OwnProps> extends React.Pu
   };
 
   private performFetchSuggestions = () => {
-    const { minChars, token } = this.props;
+    const { minChars, token, jwt } = this.props;
     const { query } = this.state;
 
     // Проверяем на минимальное количество символов для отправки
@@ -266,13 +266,15 @@ export abstract class BaseSuggestions<SuggestionType, OwnProps> extends React.Pu
       return;
     }
 
+    const authorizationHeader = jwt ? `Bearer ${jwt}` : `Token ${token}`;
+
     makeRequest<SuggestionType>(
       'POST',
       this.getSuggestionsUrl(),
       {
         headers: {
           Accept: 'application/json',
-          Authorization: `Token ${token}`,
+          Authorization: authorizationHeader,
           'Content-Type': 'application/json',
         },
         json: this.getLoadSuggestionsData(),

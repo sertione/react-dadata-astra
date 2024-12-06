@@ -8,6 +8,7 @@ import { AddressSuggestions } from '../../react-dadata/src/AddressSuggestions';
 // for local/your backend server use jwt and host
 const DADATA_TOKEN = 'some_token';
 const JWT_TOKEN = 'some_jwt';
+const HOST = 'http://localhost:8000';
 
 function App() {
   if (!JWT_TOKEN) {
@@ -15,7 +16,7 @@ function App() {
   }
   return (
     <div className="App">
-      <AddressSuggestions jwt={JWT_TOKEN} selectOnBlur host="http://localhost:8000" />
+      <AddressSuggestions jwt={JWT_TOKEN} selectOnBlur host={HOST} />
     </div>
   );
 }

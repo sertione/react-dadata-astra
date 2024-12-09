@@ -78,7 +78,7 @@ import 'react-dadata/dist/react-dadata.css';
 
 const [value, setValue] = useState();
 
-<AddressSuggestions token="API_KEY" value={value} onChange={setValue} />;
+<AddressSuggestions jwt="API_KEY" host="HOST_URL" value={value} onChange={setValue} />;
 ```
 
 ## Параметры
